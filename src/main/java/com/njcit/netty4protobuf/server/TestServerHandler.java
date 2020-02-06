@@ -11,7 +11,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 public class TestServerHandler extends SimpleChannelInboundHandler<MyDataInfo.MyMessage> {
 
-
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.MyMessage msg) throws Exception {
         MyDataInfo.MyMessage.DataType dataType = msg.getDataType();
