@@ -1,0 +1,36 @@
+syntax = "proto2";
+package com.njcit.protobuf;
+
+option optimize_for = SPEED;
+option java_package = "com.njcit.netty4protobuf";
+option java_outer_classname = "MyDataInfo";
+
+message MyMessage {
+    enum DataType{
+        PersonType = 1;
+        DogType = 2;
+        CatType = 3;
+    }
+
+    required DataType data_Type = 1;
+
+    oneof dataBody {
+        Person person = 2;
+        Dog dog = 3;
+        Cat cat = 4;
+    }
+}
+
+message Person {
+    optional string name = 1;
+    optional int32 age = 2;
+    optional string address = 3;
+}
+message Dog {
+    optional string dog_name = 1;
+    optional int32 dog_age = 2;
+}
+message Cat {
+    optional string cat_name = 1;
+    optional string cat_city = 3;
+}
