@@ -22,15 +22,22 @@ public class GrpcServer {
     }
 
     private void start() throws IOException {
-        /* The port on which the server should run */
         int port = 8899;
         server = ServerBuilder.forPort(port)
                 .addService(new StudentServerImpl())
                 .build()
                 .start();
+        System.out.println("server started");
+        //回调钩子
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("JVM退出");
+            GrpcServer.this.stop();
+        }));
+//        System.out.println("执行到这里");
     }
 
     private void stop() {
+        System.out.println("服务关闭");
         if(null != server){
             this.server.shutdown();
         }
@@ -38,6 +45,8 @@ public class GrpcServer {
 
     private void awaitTermination() throws InterruptedException {
         if(null != server){
+            //超过3秒钟，则服务器自动退出
+//            this.server.awaitTermination(3000, TimeUnit.MILLISECONDS);
             this.server.awaitTermination();
         }
     }
