@@ -44,6 +44,7 @@ public class GrpcClient {
         System.out.println("-------------------------------------");
         //客户端向服务器发出一个请求流，服务器返回一个响应
         StreamObserver<StudentResponseList> streamObserver = new StreamObserver<StudentResponseList>() {
+           //接收从服务器端返回回来的响应
             @Override
             public void onNext(StudentResponseList value) {
                 value.getStudentResponseList().forEach(
