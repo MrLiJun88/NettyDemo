@@ -27,7 +27,7 @@ public class NioCharset {
         long inputLength = new File(inputFile).length();
         FileChannel inputChannel = inputRandomAccessFile.getChannel();
         FileChannel outputChannel = outputRandomAccessFile.getChannel();
-
+        //获取文件的内存映射
         MappedByteBuffer inputData = inputChannel.map(FileChannel.MapMode.READ_ONLY,0,inputLength);
 
         System.out.println("=============================");
@@ -43,6 +43,7 @@ public class NioCharset {
         CharsetEncoder charsetEncode = charset.newEncoder();
 
         CharBuffer charBuffer = charsetDecoder.decode(inputData);
+        System.out.println(charBuffer.get(0));
         ByteBuffer outputData = charsetEncode.encode(charBuffer);
 
         outputChannel.write(outputData);
