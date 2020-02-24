@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 /**
  * @Author LiJun
  * @Date 2020/2/20 10:23
- * ByteBufferÀàĞÍ»¯µÄputÓëget·½·¨
+ * ByteBufferç±»å‹åŒ–çš„putä¸getæ–¹æ³•
  */
 
 public class NioTest5 {
@@ -15,9 +15,9 @@ public class NioTest5 {
         byteBuffer.putInt(15);
         byteBuffer.putLong(50000000L);
         byteBuffer.putDouble(14.1548);
-        byteBuffer.putChar('Àî');
+        byteBuffer.putChar('æ');
         byteBuffer.putShort((short)2);
-        byteBuffer.putChar('¿¡');
+        byteBuffer.putChar('ä¿Š');
 
         byteBuffer.flip();
 
