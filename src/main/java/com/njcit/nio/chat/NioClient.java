@@ -33,17 +33,17 @@ public class NioClient {
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
 
                 for (SelectionKey selectionKey : selectionKeys) {
-                    //æ˜¯å¦æ˜¯è¿žæŽ¥äº‹ä»¶
+                    //ÊÇ·ñÊÇÁ¬½ÓÊÂ¼þ
                     if(selectionKey.isConnectable()){
                         SocketChannel client = (SocketChannel) selectionKey.channel();
-                        //æ˜¯å¦åœ¨ç­‰å¾…è¿žæŽ¥
+                        //ÊÇ·ñÔÚµÈ´ýÁ¬½Ó
                         if(client.isConnectionPending()){
-                            //çœŸæ­£å»ºç«‹è¿žæŽ¥
+                            //ÕæÕý½¨Á¢Á¬½Ó
                             client.finishConnect();
                             ByteBuffer writeBuffer = ByteBuffer.allocate(512);
-                            writeBuffer.put((LocalDateTime.now() + ",é“¾æŽ¥æˆåŠŸ").getBytes());
+                            writeBuffer.put((LocalDateTime.now() + ",Á´½Ó³É¹¦").getBytes());
                             writeBuffer.flip();
-                            //å°†bufferä¸­çš„æ•°æ®å†™å…¥åˆ°é€šé“ä¸­
+                            //½«bufferÖÐµÄÊý¾ÝÐ´Èëµ½Í¨µÀÖÐ
                             client.write(writeBuffer);
 
                             ExecutorService executorService = Executors.newSingleThreadExecutor(Executors.defaultThreadFactory());
@@ -52,11 +52,11 @@ public class NioClient {
                                     try{
                                         writeBuffer.clear();
                                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-                                        //ä»ŽæŽ§åˆ¶å°èŽ·å–ç”¨æˆ·è¾“å…¥å†…å®¹
+                                        //´Ó¿ØÖÆÌ¨»ñÈ¡ÓÃ»§ÊäÈëÄÚÈÝ
                                         String sendMessage = bufferedReader.readLine();
                                         writeBuffer.put(sendMessage.getBytes());
                                         writeBuffer.flip();
-                                        //å°†bufferä¸­çš„å†…å®¹å†™å…¥åˆ°é€šé“ä¸­
+                                        //½«bufferÖÐµÄÄÚÈÝÐ´Èëµ½Í¨µÀÖÐ
                                         client.write(writeBuffer);
                                     }
                                     catch (Exception e){
@@ -67,11 +67,11 @@ public class NioClient {
                         }
                         client.register(selector,SelectionKey.OP_READ);
                     }
-                    //èŽ·å–æœåŠ¡å™¨ç«¯å‘é€è¿‡æ¥çš„æ¶ˆæ¯æ•°æ®
+                    //»ñÈ¡·þÎñÆ÷¶Ë·¢ËÍ¹ýÀ´µÄÏûÏ¢Êý¾Ý
                     else if(selectionKey.isReadable()){
                         SocketChannel client = (SocketChannel)selectionKey.channel();
                         ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-                        //å°†é€šé“ä¸­çš„æ•°æ®è¯»å–åˆ°bufferä¸­
+                        //½«Í¨µÀÖÐµÄÊý¾Ý¶ÁÈ¡µ½bufferÖÐ
                         int count = client.read(readBuffer);
                         if(count > 0){
                             String receiveMessage = new String(readBuffer.array(),0,count);

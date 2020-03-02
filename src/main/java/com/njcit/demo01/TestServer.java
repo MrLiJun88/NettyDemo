@@ -26,6 +26,7 @@ public class TestServer {
             e.printStackTrace();
         }
         finally {
+            //优雅关闭
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

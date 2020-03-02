@@ -17,7 +17,7 @@ public class MyServer {
                     channel(NioServerSocketChannel.class).
                     childHandler(new MyServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind(6666).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
             channelFuture.channel().closeFuture().sync();
         }
         catch (Exception e){

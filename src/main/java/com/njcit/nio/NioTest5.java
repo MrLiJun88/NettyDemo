@@ -15,9 +15,9 @@ public class NioTest5 {
         byteBuffer.putInt(15);
         byteBuffer.putLong(50000000L);
         byteBuffer.putDouble(14.1548);
-        byteBuffer.putChar('李');
+        byteBuffer.putChar('L');
         byteBuffer.putShort((short)2);
-        byteBuffer.putChar('俊');
+        byteBuffer.putChar('J');
 
         byteBuffer.flip();
 
